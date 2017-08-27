@@ -1,0 +1,86 @@
+﻿@model QRProject.Models.UserLoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+<div class="navbar navbar-fixed-top orange">
+    <div class="container">
+        <div class="navbar-header">
+
+
+            @if (Request.IsAuthenticated)
+            {
+                <span class="black little">Witaj @HttpContext.Current.User.Identity.Name</span>
+                using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Wyloguj się</a>
+                }
+            }
+            else
+            {
+                <span class="black medium">
+                    Nie masz konta?
+                </span>
+                <br />
+
+                    @Html.ActionLink("Zarejestruj się", "Registration", "User", new { @class = "black medium bigletters" })
+            }
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav"></ul>
+        </div>
+    </div>
+</div>
+
+
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <h2 class="black text-center bigletters">Logowanie</h2>
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="text-center">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div >
+                @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "black" } })
+                <div >
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
+                    <br />
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div >
+                @Html.LabelFor(model => model.Password, new { htmlAttributes = new { @class = "black" } })
+                <div >
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
+                    <br />
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div>
+                <div >
+                    <input type="submit" value="Zaloguj" class="btn orange button-big medium-large" />
+                </div>
+            </div>
+        </div>
+    }
+
+}
+else
+{
+    Response.Redirect("~/Room/QReader");
+}
+
+
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

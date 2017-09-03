@@ -10,15 +10,15 @@ namespace QRProject.Models
     {
 
         [Display(Name ="Email")]
-        [Required(AllowEmptyStrings =false, ErrorMessage ="Email wymagany")]
+        [Required(AllowEmptyStrings =false, ErrorMessage ="Email is required")]
         public string Email { get; set; }
 
-        [Required(AllowEmptyStrings =false,ErrorMessage ="Hasło wymagane")]
+        [Required(AllowEmptyStrings =false,ErrorMessage ="Password is required")]
         [DataType(DataType.Password)]
-        [Display(Name ="Hasło")]
+        [Display(Name ="Password")]
         public string Password { get; set; }
 
-        [Display(Name ="Pamiętaj mnie")]
+        [Display(Name ="Remember me")]
         public bool Remember { get; set; }
 
         public string Role { get; set; }

@@ -59,11 +59,11 @@ namespace QRProject.Controllers
 
             if (canIDoRegistration)
             {
-                message = "Pomyślnie zarezerwowałeś salę " + roomNr + ".";
+                message = "You have successfully booked the room " + roomNr + ".";
             }
             else
             {
-                message = "Nie udało się zarezerwować sali. W wybranym czasie jest ona zajęta.";
+                message = "You can't book the room. At the selected time it is busy.";
             }
 
             return View(_infoService.SetInformationViewModel(User.Identity.Name, message));

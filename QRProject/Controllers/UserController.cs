@@ -46,7 +46,7 @@ namespace QRProject.Controllers
                     database.SaveChanges();
 
                     SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
-                    message = "Zarejestrowano pomyślnie. Kod aktywacyjny został wysłany na Twój email.";
+                    message = "Registered successfully. Activation code has been sent to your email.";
                     status = true;
                 }
                 
@@ -110,7 +110,9 @@ namespace QRProject.Controllers
                     if (string.Compare(Crypto.Hash(login.Password), v.Password) == 0 && v.IsEmailVerified)
                     {
                         int timeout = login.Remember ? 525600 : 20;
-                        var ticket = new FormsAuthenticationTicket(1, v.UserId.ToString(), DateTime.Now, DateTime.Now.AddMinutes(20), login.Remember, String.Join("|", v.Role));
+                        var ticket = new FormsAuthenticationTicket(1, v.UserId.ToString(), 
+                            DateTime.Now, DateTime.Now.AddMinutes(20), login.Remember, 
+                            String.Join("|", v.Role));
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
                         cookie.Expires = DateTime.Now.AddMinutes(timeout);
@@ -169,9 +171,10 @@ namespace QRProject.Controllers
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
             var fromEmail = new MailAddress("reservation.projectemail@gmail.com", "Dotnet Awesome");
             var toEmail = new MailAddress(email);
-            var fromEmailPassword = "";
-            var subject = "Twoje konto zostało stworzone!";
-            var body = $@"<br/><br/>Twoje konto zostało aktywowane. Aby zweryfikować swój email kliknij w link.<a href='{link}'>" + link + "</a>";
+            var fromEmailPassword = "haslo123";
+            var subject = "Your account has been created!";
+            var body = $@"<br/><br/>Your account has been activated. 
+                To verify your email click on the link.<a href='{link}'>" + link + "</a>";
 
             var smtp = new SmtpClient
             {

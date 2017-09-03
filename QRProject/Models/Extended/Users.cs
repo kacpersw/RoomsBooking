@@ -16,33 +16,33 @@ namespace QRProject.Models
 
     public class UserMetadata
     {
-        [Display(Name ="Imię")]
-        [Required(AllowEmptyStrings =false, ErrorMessage ="Imię jest wymagane")]
+        [Display(Name ="First name")]
+        [Required(AllowEmptyStrings =false, ErrorMessage ="First name is required")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Nazwisko")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Nazwisko jest wymagane")]
+        [Display(Name = "Last name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Last name is required")]
         public string LastName { get; set; }
 
         [Display(Name = "Email")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Email jest wymagany")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email is required")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Display(Name ="Data urodzin")]
+        [Display(Name ="Date of birth")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{0:MM-dd-yyyy}")]
         public DateTime DateOfBirth { get; set; }
 
-        [Required(AllowEmptyStrings =false, ErrorMessage ="Hasło jest wymagane")]
+        [Required(AllowEmptyStrings =false, ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
-        [MinLength(6,ErrorMessage ="Hasło ma zawierać co najmniej 6 znaków")]
-        [Display(Name="Hasło")]
+        [MinLength(6,ErrorMessage = "Password has at least 6 characters")]
+        [Display(Name="Password")]
         public string Password { get; set; }
 
-        [Display(Name ="Potwierdź hasło")]
+        [Display(Name ="Confirm password")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage="Podano złe hasło potwierdzające")]
+        [Compare("Password", ErrorMessage="It's bad password")]
         public string ConfirmPassword { get; set; }
     }
 }

@@ -3,27 +3,26 @@
 @{
     ViewBag.Title = "Login";
 }
+
 <div class="navbar navbar-fixed-top orange">
     <div class="container">
         <div class="navbar-header">
-
-
             @if (Request.IsAuthenticated)
             {
                 <span class="black little">Witaj @HttpContext.Current.User.Identity.Name</span>
                 using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
                 {
-                    <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Wyloguj się</a>
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Log out</a>
                 }
             }
             else
             {
                 <span class="black medium">
-                    Nie masz konta?
+                    You don't have an account?
                 </span>
                 <br />
 
-                    @Html.ActionLink("Zarejestruj się", "Registration", "User", new { @class = "black medium bigletters" })
+                    @Html.ActionLink("Register", "Registration", "User", new { @class = "black medium bigletters" })
             }
         </div>
         <div class="navbar-collapse collapse">
@@ -31,19 +30,13 @@
         </div>
     </div>
 </div>
-
-
-
 @if (!User.Identity.IsAuthenticated)
 {
-    <h2 class="black text-center bigletters">Logowanie</h2>
+    <h2 class="black text-center bigletters">Log in</h2>
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
         <div class="text-center">
-
-
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div >
                 @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "black" } })
@@ -65,20 +58,16 @@
             <br />
             <div>
                 <div >
-                    <input type="submit" value="Zaloguj" class="btn orange button-big medium-large" />
+                    <input type="submit" value="Log in" class="btn orange button-big medium-large" />
                 </div>
             </div>
         </div>
     }
-
 }
 else
 {
     Response.Redirect("~/Room/QReader");
 }
-
-
-
 
 @section Scripts {
     <script src="~/Scripts/jquery.validate.min.js"></script>

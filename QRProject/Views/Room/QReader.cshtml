@@ -9,14 +9,12 @@
     <div class="navbar navbar-fixed-top orange">
         <div class="container">
             <div class="navbar-header">
-
-
                 @if (Request.IsAuthenticated)
                 {
-                    <span class="black little">Witaj @Model.UserFirstName</span>
+                    <span class="black little">Hello @Model.UserFirstName</span>
                     using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
                     {
-                        <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Wyloguj się</a>
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Log out</a>
                     }
                 }
             </div>
@@ -27,7 +25,7 @@
     </div>
     <br />
     <div class="text-center">
-        <span class="black medium text-center">Zrób zdjęcie, aby odczytać kod QR.</span>
+        <span class="black medium text-center">Take a picture to read the QR code.</span>
         <br />
         <br />
     </div>
@@ -35,46 +33,38 @@
         @using (Html.BeginForm("Upload", "Room", FormMethod.Post, new { enctype = "multipart/form-data", runat = "server" }))
         {
             <div style="text-align: center;">
-
-                <label class="fileContainer black medium-large btn orange">
-                    Kliknij, aby zrobić zdjęcie
-                    <input type="file" name="file" accept="image/*" runat="server" capture="camera">
-                </label>
-                <br />
-                <br />
-                <input type="submit" name="Submit" id="Submit" value="Sprawdź QR" class="btn medium-large orange button-big" />
+                    <label class="fileContainer black medium-large btn orange">
+                        Click to take a photo
+                        <input type="file" name="file" accept="image/*" runat="server" capture="camera">
+                    </label>
+                <br /><br />
+                <input type="submit" name="Submit" id="Submit" value="Check QR code" class="btn medium-large orange button-big" />
             </div>
-
         }
-
-
-
     </div>
-    <br />
-    <br />
+    <br /><br />
     <div class="container">
         <div class="black bigletters medium text-center">
-            Twoje rezerwacje
+            Your reservations
         </div>
         <br />
-
         <div ng-app="reservationApp" ng-controller="reservationController" ng-init="load('@User.Identity.Name')" class="center-block">
             <table class="table table-responsive" style="text-align: left;">
                 <thead>
                 <th>
-                    Numer sali
+                    Room number
                 </th>
                 <th>
-                    Data
+                    Date
                 </th>
                 <th>
-                    Godzina startu
+                    Start hour
                 </th>
                 <th>
-                    Godzina zakończenia
+                    End hour
                 </th>
                 <th class="text-center">
-                    Usuń
+                    Cancel
                 </th>
                 </thead>
                 <tbody>
@@ -83,50 +73,33 @@
                         <td>{{reservation.day | date:'yyyy/MM/dd'}}</td>
                         <td>{{reservation.startHour | date:'H:m'}}</td>
                         <td>{{reservation.endHour | date:'H:m'}}</td>
-                        
-                        <td class="text-center"><button ng-click="cancel(reservation.reservationId, '@User.Identity.Name')" class="btn orange">Anuluj rezerwację</button></td>
+                        <td class="text-center"><button ng-click="cancel(reservation.reservationId, '@User.Identity.Name')" class="btn orange">Cancel</button></td>
                     </tr>
                 </tbody>
             </table>
-
-
-
-
         </div>
-
-
     </div>
-   
-
- 
-
-    
-
-
 }
 else
 {
     Response.Redirect("~/User/Login");
 }
 
-
-
 @section Scripts{
 
     <script>
-
-
         var app = angular.module('reservationApp', []);
         app.controller('reservationController', function ($scope, $http) {
             $scope.load = function (id) {
                 $scope.getAll(id);
-
             };
+
             $scope.getAll = function (id) {
                 $http.get("/api/reservations/" + id).then((response) => {
                     $scope.reservations = response.data;
                 })
             }
+
             $scope.cancel = function (reservationId, id) {
                 $http.delete("/api/Reservations/" + reservationId)
                 .then((response) => {

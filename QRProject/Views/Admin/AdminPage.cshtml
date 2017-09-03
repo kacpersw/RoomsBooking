@@ -9,14 +9,12 @@
     <div class="navbar navbar-fixed-top orange">
         <div class="container">
             <div class="navbar-header">
-
-
                 @if (Request.IsAuthenticated)
                 {
-                    <span class="black little">Witaj @Model.UserFirstName</span>
+                    <span class="black little">Hello @Model.UserFirstName</span>
                     using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
                     {
-                        <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Wyloguj się</a>
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Log out</a>
                     }
                 }
             </div>
@@ -25,70 +23,59 @@
             </div>
         </div>
     </div>
-
-
-
-    <h2 class="text-center bigletters high-letters">Panel administratora</h2>
+    <h2 class="text-center bigletters high-letters">Admin panel</h2>
     <br />
-
     <div ng-app="adminPage" ng-controller="adminController" class="text-center">
-        <button class="btn orange medium-large button-big bigletters" ng-model="showRoom" ng-click="showRooms()" ng-if="showRoom!=1">Wyświetl sale</button>
-        <button class="btn gray medium-large button-big bigletters" ng-model="showRoom" ng-click="hideRooms()" ng-if="showRoom==1">Schowaj sale</button>
+        <button class="btn orange medium-large button-big bigletters" ng-model="showRoom" ng-click="showRooms()" ng-if="showRoom!=1">Show rooms</button>
+        <button class="btn gray medium-large button-big bigletters" ng-model="showRoom" ng-click="hideRooms()" ng-if="showRoom==1">Hide rooms</button>
         <br />
         <div ng-if="showRoom==1">
-            <h3>Wszystkie sale</h3>
+            <h3>All rooms</h3>
             <div class="container">
                 <table class="table table-responsive table-striped" style="text-align: left;">
                     <thead>
-                    <th>Numer sali</th>
-                    <th>Pojemność sali</th>
-                    <th class="text-center">Usuń salę</th>
+                    <th>Number</th>
+                    <th>Capacity</th>
+                    <th class="text-center">Delete</th>
                     </thead>
                     <tbody>
                         <tr ng-repeat="room in rooms">
                             <td>{{room.RoomNr}}</td>
                             <td>{{room.RoomCapacity}}</td>
-                            <td class="text-center"><button ng-click="deleteRoom(room.RoomId)" class="btn gray">Usuń</button></td>
+                            <td class="text-center"><button ng-click="deleteRoom(room.RoomId)" class="btn gray">Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
-
-
             </div>
-           
-
             <div class="text-center">
-                <label for="number">Numer sali</label>
+                <label for="number">Number</label>
                 <br />
-                <input type="text" id="number" required ng-model="newRoom.RoomNr"/>
+                <input type="text" id="number" required ng-model="newRoom.RoomNr" />
             </div>
             <br />
             <div class="text-center">
-                <label for="capacity"> Pojemność sali</label>
+                <label for="capacity">Capacity</label>
                 <br />
-                <input id="capacity" type="text" required ng-model="newRoom.RoomCapacity"/>
+                <input id="capacity" type="text" required ng-model="newRoom.RoomCapacity" />
             </div>
             <br />
-            <button ng-click="addNewRoom(newRoom)" type="submit" class="btn gray">Dodaj salę</button>
-            <br />
-            <br />
+            <button ng-click="addNewRoom(newRoom)" type="submit" class="btn gray">Add room</button>
+            <br /><br />
         </div>
         <br />
-
-
         <div>
-            <button class="btn orange medium-large button-big bigletters" ng-model="showUser" ng-click="showUsers()" ng-if="showUser!=1">Wyświetl użytkowników</button>
-            <button class="btn gray medium-large button-big bigletters" ng-model="showUser" ng-click="hideUsers()" ng-if="showUser==1">Schowaj użytkowników</button>
+            <button class="btn orange medium-large button-big bigletters" ng-model="showUser" ng-click="showUsers()" ng-if="showUser!=1">Show users</button>
+            <button class="btn gray medium-large button-big bigletters" ng-model="showUser" ng-click="hideUsers()" ng-if="showUser==1">Hide users</button>
             <div ng-if="showUser==1">
-                <h3>Wszyscy użytkownicy</h3>
+                <h3>All users</h3>
                 <div class="container">
                     <table class="table table-responsive table-striped" style="text-align: left;">
                         <thead>
-                        <th>Imię</th>
-                        <th>Nazwisko</th>
+                        <th>First name</th>
+                        <th>Last name</th>
                         <th>Login</th>
                         <th>Email</th>
-                        <th class="text-center">Usuń użytkownika</th>
+                        <th class="text-center">Delete</th>
                         </thead>
                         <tbody>
                             <tr ng-repeat="user in users">
@@ -96,33 +83,28 @@
                                 <td>{{user.LastName}}</td>
                                 <td>{{user.Username}}</td>
                                 <td>{{user.Email}}</td>
-                                <td class="text-center"><button ng-click="deleteUser(user.UserId)" class="btn gray">Usuń</button></td>
+                                <td class="text-center"><button ng-click="deleteUser(user.UserId)" class="btn gray">Delete</button></td>
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
-               
-
-
             </div>
         </div>
         <br />
         <div>
-
-            <button class="btn orange medium-large button-big bigletters" ng-model="showReservation" ng-click="showReservations()" ng-if="showReservation!=1">Wyświetl rezerwacje</button>
-            <button class="btn gray medium-large button-big bigletters" ng-model="showReservation" ng-click="hideReservations()" ng-if="showReservation==1">Schowaj rezerwacje</button>
+            <button class="btn orange medium-large button-big bigletters" ng-model="showReservation" ng-click="showReservations()" ng-if="showReservation!=1">Show reservations</button>
+            <button class="btn gray medium-large button-big bigletters" ng-model="showReservation" ng-click="hideReservations()" ng-if="showReservation==1">Hide reservations</button>
             <div ng-if="showReservation==1">
-                <h3>Wszystkie rezerwacje</h3>
+                <h3>All reservations</h3>
                 <div class="container">
                     <table class="table table-responsive table-striped" style="text-align: left;">
                         <thead>
-                        <th>Numer sali</th>
-                        <th>Użytkownik</th>
-                        <th>Data</th>
-                        <th>Godzina rozpoczęcia</th>
-                        <th>Godzina zakończenia</th>
-                        <th class="text-center">Usuń rezerwację</th>
+                        <th>Number</th>
+                        <th>User</th>
+                        <th>Date</th>
+                        <th>Start hour</th>
+                        <th>End hour</th>
+                        <th class="text-center">Delete</th>
                         </thead>
                         <tbody>
                             <tr ng-repeat="reservation in reservations">
@@ -131,13 +113,11 @@
                                 <td>{{reservation.Day | date:'yyyy/MM/dd' }}</td>
                                 <td>{{reservation.StartHour}}</td>
                                 <td>{{reservation.EndHour}}</td>
-                                <td class="text-center"><button ng-click="deleteReservation(reservation.ReservationId)" class="btn gray">Usuń</button></td>
+                                <td class="text-center"><button ng-click="deleteReservation(reservation.ReservationId)" class="btn gray">Delete</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                
-               
             </div>
         </div>
     </div>

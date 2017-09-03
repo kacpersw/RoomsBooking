@@ -6,11 +6,9 @@
 <div class="navbar navbar-fixed-top orange">
     <div class="container">
         <div class="navbar-header">
-
-
             @if (Request.IsAuthenticated)
             {
-                <span class="black little">Witaj @Model.UserFirstName</span>
+                <span class="black little">Hello @Model.UserFirstName</span>
             }
         </div>
         <div class="navbar-collapse collapse">
@@ -18,23 +16,16 @@
         </div>
     </div>
 </div>
-
-
-
-
 <br />
 <div class="text-center">
     <div class="black medium bigletters">
         @Model.Message
     </div>
-
-<br />
-    <br />
-    @Html.ActionLink("Wróć do czytnika QR", "QReader", "Room", new { @class = "btn orange button-big medium-large black"  })
-    <br />
-    <br />
+    <br /><br />
+    @Html.ActionLink("Back to QR reader", "QReader", "Room", new { @class = "btn orange button-big medium-large black" })
+    <br /><br />
     @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
     {
-        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn orange button-big medium-large black">Wyloguj się</a>
+        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn orange button-big medium-large black">Log out</a>
     }
 </div>

@@ -9,16 +9,11 @@
     <div class="navbar navbar-fixed-top orange">
         <div class="container">
             <div class="navbar-header">
-
-
-
-                <span class="black little">Witaj @Model.UserFirstName</span>
+                <span class="black little">Hello @Model.UserFirstName</span>
                 @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
                 {
-                    <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Wyloguj się</a>
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="black little bigletters">Log out</a>
                 }
-
-
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
@@ -28,60 +23,37 @@
     <br />
     using (Html.BeginForm("Manual", "Room", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline text-center" }))
     {
-
-        <label for="roomNr">Numer sali</label>
+        <label for="roomNr">Room number</label>
         <br />
-
         <div ng-app="adminPage" ng-controller="adminController">
             <select name="RoomNr" id="roomNr" class="inputs-size-bigger" required>
                 <option ng-repeat="room in rooms" value="{{room.RoomNr}}">{{room.RoomNr}}</option>
                 <option selected="@Model.Message">@Model.Message</option>
             </select>
         </div>
-
-
         <br />
-
-        <label for="day">Data</label>
+        <label for="day">Date</label>
             <br />
             <input type="date" name="date" id="day" class="inputs-size-bigger" required value="@DateTime.Now.ToString("yyyy-MM-dd")" />
-
             <br />
-
-            <label for="firstHour">Godzina rozpoczęcia</label>
+            <label for="firstHour">Start hour</label>
             <br />
             <input type="time" name="StartHour" id="firstHour" class="inputs-size-bigger" required value="@DateTime.Now.ToString("HH:mm")" />
-
             <br />
-
-            <label for="lastHour">Godzina zakończenia</label>
+            <label for="lastHour">End hour</label>
             <br />
             <input type="time" name="EndHour" id="lastHour" class="inputs-size-bigger" required value="@DateTime.Now.AddHours(2).ToString("HH:mm")" />
-
-            <br />
-                <br />
-
-
+            <br /><br />
                 <div class="text-center">
-                    <input type="submit" name="Submit" id="Submit" class="btn orange button-big medium-large" value="Zarezerwuj salę" runat="server" />
+                    <input type="submit" name="Submit" id="Submit" class="btn orange button-big medium-large" value="Book the room" runat="server" />
                 </div>
     }
-    <br />
-
-
-    <br />
-    <br />
-
-
-
-
-
+    <br /><br /><br />
 }
 else
 {
     Response.Redirect("~/User/Login");
 }
-
 
 @section Scripts {
     <script src="~/Scripts/angular.min.js"></script>

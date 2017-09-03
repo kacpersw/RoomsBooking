@@ -3,27 +3,22 @@
 @{
     ViewBag.Title = "Registration";
 }
+
 @if (!Request.IsAuthenticated)
-            {
+{
     <div class="navbar navbar-fixed-top orange">
         <div class="container">
             <div class="navbar-header">
-
-
-
-                <span class="black medium">Masz już konto?</span>
+                <span class="black medium">Do you have an account already?</span>
                 <br />
-                @Html.ActionLink("Zaloguj się", "Login", "User", new { @class = "medium black bigletters" })
-
+                @Html.ActionLink("Log in", "Login", "User", new { @class = "medium black bigletters" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav"></ul>
             </div>
         </div>
     </div>
-
-    <h2 class="black text-center bigletters">Rejestracja</h2>
-
+    <h2 class="black text-center bigletters">Register</h2>
     if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
     {
         if (ViewBag.Message != null)
@@ -38,42 +33,35 @@
         using (Html.BeginForm("Registration", "User"))
         {
             @Html.AntiForgeryToken()
-
             <div class="text-center">
-              
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div >
+                <div>
                     @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "black" })
-                    <div >
+                    <div>
                         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
                         <br />
                         @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div >
+                <div>
                     @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "black" })
-                    <div >
+                    <div>
                         @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
                         <br />
                         @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div >
+                <div>
                     @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "black" })
-                    <div >
+                    <div>
                         @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
                         <br />
                         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-
-
-                <div >
+                <div>
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "black" })
-                    <div >
+                    <div>
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
                         <br />
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
@@ -81,37 +69,34 @@
                         @Html.ValidationMessage("EmailExist", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div>
                     @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "black" })
-                    <div >
+                    <div>
                         @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
                         <br />
                         @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div >
+                <div>
                     @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "black" })
-                    <div >
+                    <div>
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
                         <br />
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div >
+                <div>
                     @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "black" })
-                    <div >
+                    <div>
                         @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "inputs-size-bigger" } })
                         <br />
                         @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <br />
-                <div >
-                    <div >
-                        <input type="submit" value="Zarejestruj" class="btn orange button-big medium-large" />
+                <div>
+                    <div>
+                        <input type="submit" value="Register" class="btn orange button-big medium-large" />
                     </div>
                 </div>
             </div>
@@ -123,7 +108,6 @@
             }
         }
     }
-
 }
 else
 {
